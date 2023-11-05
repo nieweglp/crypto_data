@@ -1,6 +1,5 @@
 from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime, Float
-from enum import Enum
 from dotenv import load_dotenv
 import os
 
@@ -11,7 +10,7 @@ Base = declarative_base()
 class FactPrice(Base):
     __tablename__ = "fact_spot_price"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     timestamp = Column(DateTime)
     coin = Column(String(3))
     fiat_currency = Column(String(3))
@@ -21,7 +20,7 @@ class FactPrice(Base):
 load_dotenv()
 
 
-class DBConfig():
+class DBConfig:
     def __init__(self):
         self.DB_ENGINE = os.getenv("DB_ENGINE")
         self.LOGIN = os.getenv("LOGIN")
