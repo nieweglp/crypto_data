@@ -30,7 +30,6 @@ def main():
             fiat_currency=data["currency"],
             price=data["amount"],
         )
-        print(fact_price)
         session.add(fact_price)
         session.commit()
 
