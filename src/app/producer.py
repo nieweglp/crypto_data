@@ -12,8 +12,9 @@ producer = KafkaProducer(
 )
 
 while True:
-    sleep(1)
+    # sleep(1)
     price = (requests.get(url)).json()
     print("Price fetched")
+    print(price)
     producer.send("crypto-stream", price)
     print("Price sent to consumer")
