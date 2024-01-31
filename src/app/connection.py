@@ -3,7 +3,7 @@ from configparser import ConfigParser
 
 class DBConfig:
     config = ConfigParser()
-    config.read("config.ini")
+    config.read("src/configs/config.ini")
     def __init__(self, database):
         self.DB_ENGINE = self.config.get(database, "DB_ENGINE")
         self.LOGIN = self.config.get(database, "LOGIN")
