@@ -4,21 +4,22 @@ import json
 from pymongo import MongoClient
 from connection import DBConfig
 
-consumer = KafkaConsumer(
-    "crypto-stream",
-    bootstrap_servers=["localhost:9092"],
-    value_deserializer=lambda m: json.loads(m.decode("ascii")),
-)
+if __name__ == "__main__":
+    consumer = KafkaConsumer(
+        "crypto-stream",
+        bootstrap_servers=["localhost:9092"],
+        value_deserializer=lambda m: json.loads(m.decode("ascii")),
+    )
 
-url = DBConfig("mongodb").get_connection_url_mongodb()
+    url = DBConfig("mongodb").get_connection_url_mongodb()
 
-client = MongoClient(url)
-print("Connection successful")
-db = client.crypto_db
-collection = db.btc
+    client = MongoClient(url)
+    print("Connection successful")
+    db = client.crypto_db
+    collection = db.btc
 
-for message in consumer:
-    data = message.value["data"]
-    data["fetched_timestamp"] = datetime.now()
-    collection.insert_one(data)
+    for message in consumer:
+        data = message.value["data"]
+        data["fetched_timestamp"] = datetime.now()
+        collection.insert_one(data)
     

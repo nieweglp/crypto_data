@@ -5,6 +5,6 @@ https://api.coinbase.com/v2/prices/btc-usd/spot
 
 2. Save streaming data to MongoDB NoSQL document database.
 
-3. Create database in Postgres.
+3. Create database in Postgres and insert data from MongoDB
 
-4. Loading data to Postgres from MongoDB using Airflow.
+4. Orchestrate workflow using Airflow.

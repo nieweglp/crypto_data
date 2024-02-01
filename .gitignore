@@ -4,3 +4,6 @@ __pycache__
 .mypy_cache
 .pytest_cache
 .vscode
+airflow/config
+airflow/logs
+airflow/plugins

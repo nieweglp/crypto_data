@@ -13,8 +13,7 @@
             "driver": "PostgreSQL",
             "name": "crypto_db",
             "database": "crypto_db",
-            "username": "admin",
-            "password": "admin"
+            "username": "admin"
         }
     ]
 }
