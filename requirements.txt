@@ -99,6 +99,7 @@ prison==0.2.1
 protobuf==4.25.2
 psutil==5.9.8
 psycopg2-binary==2.9.9
+pybuilder==0.13.10
 pycparser==2.21
 pydantic==2.6.0
 pydantic_core==2.16.1

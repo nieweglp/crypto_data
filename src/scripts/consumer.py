@@ -2,7 +2,7 @@ from datetime import datetime
 from kafka import KafkaConsumer
 import json
 from pymongo import MongoClient
-from connection import DBConfig
+from src.app.connection import DBConfig
 
 if __name__ == "__main__":
     consumer = KafkaConsumer(
