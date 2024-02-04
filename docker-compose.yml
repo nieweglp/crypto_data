@@ -1,21 +1,6 @@
 version: "3.9"
-x-airflow-common:
-  &airflow-common
-  image: apache/airflow:2.0.0
-  environment:
-    - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-    - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://admin:admin@localhost:5432/crypto_db
-    - AIRFLOW__CORE__FERNET_KEY=FB0o_zt4e3Ziq3LdUUO7F2Z95cvFFx16hU8jTeR1ASM=
-    - AIRFLOW__CORE__LOAD_EXAMPLES=False
-    - AIRFLOW__CORE__LOGGING_LEVEL=INFO
-  volumes:
-    - ./dags:/opt/airflow/dags
-    - ./airflow-data/logs:/opt/airflow/logs
-    - ./airflow-data/plugins:/opt/airflow/plugins
-    - ./airflow-data/airflow.cfg:/opt/airlfow/airflow.cfg
-  depends_on:
-    - postgres
 services:
+
   mongodb:
     container_name: mongodb
     image: mongo
@@ -25,20 +10,32 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=admin
     ports:
       - "27017:27017"
+    networks:
+      crypto-network:
+
   postgres:
     container_name: postgres
     image: postgres:12
+    restart: always
     environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=crypto_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: crypto_db
     ports:
       - "6543:5432"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      crypto-network:
+
   zookeeper:
     image: wurstmeister/zookeeper
     container_name: zookeeper
     ports:
       - "2181:2181"
+    networks:
+      crypto-network:
+
   kafka:
     image: wurstmeister/kafka
     container_name: kafka
@@ -47,41 +44,27 @@ services:
     environment:
       KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-  airflow-init:
-    << : *airflow-common
-    container_name: airflow_init
-    entrypoint: /bin/bash
-    command:
-      - -c
-      - airflow users list || ( airflow db init &&
-        airflow users create
-          --role Admin
-          --username admin
-          --password admin
-          --email airflow@airflow.com
-          --firstname airflow
-          --lastname airflow )
-    restart: on-failure
-  airflow-webserver:
-    << : *airflow-common
-    command: airflow webserver
-    ports:
-      - 8080:8080
-    container_name: airflow_webserver
-    restart: always
-  airflow-scheduler:
-    << : *airflow-common
-    command: airflow scheduler
-    container_name: airflow_scheduler
-    restart: always
-  services:
+    networks:
+      crypto-network:
+
   grafana:
-    image: grafana/grafana-enterprise
     container_name: grafana
+    image: grafana/grafana:latest
     restart: unless-stopped
+    depends_on:
+      - postgres
+      - kafka
     ports:
       - '3000:3000'
     volumes:
       - grafana-storage:/var/lib/grafana
+    networks:
+      crypto-network:
+
 volumes:
-  grafana-storage: {}
+  grafana-storage:
+  postgres:
+
+networks:
+  crypto-network:
+    driver: bridge
