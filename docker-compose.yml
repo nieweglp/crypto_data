@@ -1,8 +1,8 @@
 version: "3.9"
 services:
 
-  mongodb:
-    container_name: mongodb
+  mongodb_crypto_data:
+    container_name: mongodb_crypto_data
     image: mongo
     restart: always
     environment:
@@ -13,8 +13,8 @@ services:
     networks:
       crypto-network:
 
-  postgres:
-    container_name: postgres
+  postgres_crypto_data:
+    container_name: postgres_crypto_data
     image: postgres:12
     restart: always
     environment:
@@ -28,17 +28,17 @@ services:
     networks:
       crypto-network:
 
-  zookeeper:
+  zookeeper_crypto_data:
     image: wurstmeister/zookeeper
-    container_name: zookeeper
+    container_name: zookeeper_crypto_data
     ports:
       - "2181:2181"
     networks:
       crypto-network:
 
-  kafka:
+  kafka_crypto_data:
     image: wurstmeister/kafka
-    container_name: kafka
+    container_name: kafka_crypto_data
     ports:
       - "9092:9092"
     environment:
@@ -52,8 +52,8 @@ services:
     image: grafana/grafana:latest
     restart: unless-stopped
     depends_on:
-      - postgres
-      - kafka
+      - postgres_crypto_data
+      - kafka_crypto_data
     ports:
       - '3000:3000'
     volumes:

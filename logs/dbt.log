@@ -1,0 +1,127 @@
+[0m20:10:55.248560 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6773c92d70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6772049c60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6772049c00>]}
+
+
+============================== 20:10:55.256245 | 7d6df599-32ce-44e4-a606-9af668d222c7 ==============================
+[0m20:10:55.256245 [info ] [MainThread]: Running with dbt=1.7.8
+[0m20:10:55.257682 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/home/pawel/.dbt', 'debug': 'False', 'fail_fast': 'False', 'log_path': 'logs', 'warn_error': 'None', 'version_check': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'introspect': 'True', 'invocation_command': 'dbt init crypto_dbt', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m20:10:55.258850 [error] [MainThread]: Encountered an error:
+[ConfigFolderDirectory]: Unable to parse dict {'dir': PosixPath('/home/pawel/.dbt')}
+[0m20:10:55.263463 [error] [MainThread]: Traceback (most recent call last):
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/google/protobuf/json_format.py", line 608, in _ConvertFieldValuePair
+    _ConvertScalarFieldValue(value, field,
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/google/protobuf/json_format.py", line 779, in _ConvertScalarFieldValue
+    if _UNPAIRED_SURROGATE_PATTERN.search(value):
+TypeError: expected string or bytes-like object
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/dbt/events/base_types.py", line 72, in __init__
+    self.pb_msg = ParseDict(kwargs, msg_cls())
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/google/protobuf/json_format.py", line 446, in ParseDict
+    parser.ConvertMessage(js_dict, message, '')
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/google/protobuf/json_format.py", line 487, in ConvertMessage
+    self._ConvertFieldValuePair(value, message, path)
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/google/protobuf/json_format.py", line 622, in _ConvertFieldValuePair
+    raise ParseError(
+google.protobuf.json_format.ParseError: Failed to parse dir field: expected string or bytes-like object.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/dbt/cli/requires.py", line 91, in wrapper
+    result, success = func(*args, **kwargs)
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/dbt/cli/requires.py", line 76, in wrapper
+    return func(*args, **kwargs)
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/dbt/cli/main.py", line 515, in init
+    results = task.run()
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/dbt/task/init.py", line 298, in run
+    self.create_profiles_dir(profiles_dir)
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/dbt/task/init.py", line 70, in create_profiles_dir
+    fire_event(ConfigFolderDirectory(dir=profiles_dir))
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/dbt/events/base_types.py", line 81, in __init__
+    raise Exception(error_msg)
+Exception: [ConfigFolderDirectory]: Unable to parse dict {'dir': PosixPath('/home/pawel/.dbt')}
+
+[0m20:10:55.268704 [debug] [MainThread]: Resource report: {"command_name": "init", "command_wall_clock_time": 0.02493552, "process_user_time": 5.809923, "process_kernel_time": 0.292096, "process_mem_max_rss": "95068", "process_in_blocks": "14088", "process_out_blocks": "8", "command_success": false}
+[0m20:10:55.271120 [debug] [MainThread]: Command `dbt init` failed at 20:10:55.270428 after 0.03 seconds
+[0m20:10:55.273032 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6773c92d70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6772049db0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6772049f00>]}
+[0m20:10:55.274828 [debug] [MainThread]: Flushing usage events
+[0m20:43:40.676336 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f35f4b83dc0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f35f3001cc0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f35f3001c60>]}
+
+
+============================== 20:43:40.682325 | 52159c80-7e7d-4d32-a585-86810ce14417 ==============================
+[0m20:43:40.682325 [info ] [MainThread]: Running with dbt=1.7.8
+[0m20:43:40.683609 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'version_check': 'True', 'log_path': 'logs', 'profiles_dir': '/home/pawel/.dbt', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'introspect': 'True', 'log_format': 'default', 'target_path': 'None', 'invocation_command': 'dbt init', 'send_anonymous_usage_stats': 'True'}
+[0m20:43:40.684737 [error] [MainThread]: Encountered an error:
+[ConfigFolderDirectory]: Unable to parse dict {'dir': PosixPath('/home/pawel/.dbt')}
+[0m20:43:40.687611 [error] [MainThread]: Traceback (most recent call last):
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/google/protobuf/json_format.py", line 608, in _ConvertFieldValuePair
+    _ConvertScalarFieldValue(value, field,
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/google/protobuf/json_format.py", line 779, in _ConvertScalarFieldValue
+    if _UNPAIRED_SURROGATE_PATTERN.search(value):
+TypeError: expected string or bytes-like object
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/dbt/events/base_types.py", line 72, in __init__
+    self.pb_msg = ParseDict(kwargs, msg_cls())
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/google/protobuf/json_format.py", line 446, in ParseDict
+    parser.ConvertMessage(js_dict, message, '')
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/google/protobuf/json_format.py", line 487, in ConvertMessage
+    self._ConvertFieldValuePair(value, message, path)
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/google/protobuf/json_format.py", line 622, in _ConvertFieldValuePair
+    raise ParseError(
+google.protobuf.json_format.ParseError: Failed to parse dir field: expected string or bytes-like object.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/dbt/cli/requires.py", line 91, in wrapper
+    result, success = func(*args, **kwargs)
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/dbt/cli/requires.py", line 76, in wrapper
+    return func(*args, **kwargs)
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/dbt/cli/main.py", line 515, in init
+    results = task.run()
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/dbt/task/init.py", line 298, in run
+    self.create_profiles_dir(profiles_dir)
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/dbt/task/init.py", line 70, in create_profiles_dir
+    fire_event(ConfigFolderDirectory(dir=profiles_dir))
+  File "/home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/dbt/events/base_types.py", line 81, in __init__
+    raise Exception(error_msg)
+Exception: [ConfigFolderDirectory]: Unable to parse dict {'dir': PosixPath('/home/pawel/.dbt')}
+
+[0m20:43:40.689807 [debug] [MainThread]: Resource report: {"command_name": "init", "command_wall_clock_time": 0.017236069, "process_user_time": 4.59481, "process_kernel_time": 0.175954, "process_mem_max_rss": "95716", "process_out_blocks": "16", "command_success": false, "process_in_blocks": "0"}
+[0m20:43:40.691227 [debug] [MainThread]: Command `dbt init` failed at 20:43:40.690863 after 0.02 seconds
+[0m20:43:40.692187 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f35f4b83dc0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f35f3001e10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f35f3001f60>]}
+[0m20:43:40.693201 [debug] [MainThread]: Flushing usage events
+[0m20:48:39.041756 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f05133a6d70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0511759c30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0511759bd0>]}
+
+
+============================== 20:48:39.048647 | fe995c1b-843b-4d90-acfa-09202ba03410 ==============================
+[0m20:48:39.048647 [info ] [MainThread]: Running with dbt=1.7.8
+[0m20:48:39.050441 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/home/pawel/.dbt', 'fail_fast': 'False', 'version_check': 'True', 'log_path': 'logs', 'warn_error': 'None', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'invocation_command': 'dbt init crypto_data', 'static_parser': 'True', 'introspect': 'True', 'target_path': 'None', 'log_format': 'default', 'send_anonymous_usage_stats': 'True'}
+[0m20:48:39.052399 [debug] [MainThread]: Starter project path: /home/pawel/projects/crypto_data/venv/lib/python3.10/site-packages/dbt/include/starter_project
+[0m20:48:39.057488 [info ] [MainThread]: 
+Your new dbt project "crypto_data" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m20:48:39.058529 [info ] [MainThread]: Setting up your profile.
+[0m20:50:06.903231 [info ] [MainThread]: Profile crypto_data written to /home/pawel/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m20:50:06.907643 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 87.869194, "process_user_time": 4.795747, "process_kernel_time": 0.216168, "process_mem_max_rss": "99300", "process_in_blocks": "9296", "process_out_blocks": "80"}
+[0m20:50:06.910789 [debug] [MainThread]: Command `dbt init` succeeded at 20:50:06.910013 after 87.87 seconds
+[0m20:50:06.913124 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f05133a6d70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0511759ff0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f051175a1a0>]}
+[0m20:50:06.915746 [debug] [MainThread]: Flushing usage events

@@ -1,0 +1,22 @@
+
+version: 1
+
+models:
+  - name: view_spot_price
+    description: "Fact table about BTC price from Coinbase API "
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: fetched_timestamp
+        description: "Timestamp of getting data from Coinbase API"
+      - name: insert_timestamp
+        description: "Timestamp of inserting data to PostgreSQL"
+      - name: coin
+        description: "Crypto coin name"
+      - name: fiat_currency
+        description: "Fiat currency name, which is price calculated"
+      - name: price
+        description: "Price of coin"
